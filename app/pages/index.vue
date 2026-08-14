@@ -1,2624 +1,613 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-
-/* =========================================================
-   TYPES
-========================================================= */
-
-interface ProjectScreenshot {
-  title: string
-  description: string
-  image?: string
-}
-
-interface ProjectChallenge {
-  problem: string
-  solution: string
-}
-
-interface Project {
-  title: string
-  slug: string
-  description: string
-  longDescription: string
-  type: string
-  year: string
-  role: string
-  company?: string
-  status: string
-  duration?: string
-  team?: string
-
-  icon: string
-  gradient: string
-
-  tags: string[]
-  technologies: string[]
-  features: string[]
-  responsibilities: string[]
-
-  challenges: ProjectChallenge[]
-
-  result: string
-
-  screenshots: ProjectScreenshot[]
-
-  links: {
-    github?: string
-    demo?: string
-    playStore?: string
-  }
-}
-
-/* =========================================================
-   STATE
-========================================================= */
-
-const isDark = ref(true)
-const mobileMenuOpen = ref(false)
-const selectedProject = ref<Project | null>(null)
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-const projects: Project[] = [
-  {
-    title: 'Smart GPS',
-
-    slug: 'smart-gps',
-
-    type: 'Mobile Application',
-
-    year: '2023',
-
-    role: 'Mobile Developer',
-
-    company: 'TurboTech Co., Ltd.',
-
-    status: 'Production',
-
-    duration: 'Project duration — add your actual duration',
-
-    team: 'Team size — add your actual team size',
-
-    description:
-      'A smart GPS mobile application focused on location-based services and GPS management.',
-
-    longDescription:
-      'Smart GPS is a mobile application developed for GPS and location-based services. The application provides a mobile interface for users to interact with GPS-related functionality while connecting the frontend application with backend services.',
-
-    icon: '⌖',
-
-    gradient: 'from-cyan-500 via-blue-500 to-indigo-600',
-
-    tags: [
-      'Flutter',
-      'Dart',
-      'Google Maps',
-      'REST API'
-    ],
-
-    technologies: [
-      'Flutter',
-      'Dart',
-      'Google Maps',
-      'REST API',
-      'Responsive UI',
-      'State Management'
-    ],
-
-    features: [
-      'User authentication',
-      'Email and password login',
-      'GPS and location functionality',
-      'Google Maps integration',
-      'REST API integration',
-      'Responsive mobile interface',
-      'Loading and API state handling'
-    ],
-
-    responsibilities: [
-      'Designed and implemented mobile application screens',
-      'Developed reusable Flutter UI components',
-      'Integrated REST APIs with the mobile application',
-      'Implemented authentication screens and user flows',
-      'Integrated Google Maps and location-related functionality',
-      'Connected frontend screens with backend services',
-      'Handled asynchronous application states',
-      'Worked on responsive mobile layouts',
-      'Tested application flows and fixed UI issues'
-    ],
-
-    challenges: [
-      {
-        problem:
-          'The application needed to combine mobile UI, GPS-related functionality, map services and backend APIs into one consistent experience.',
-
-        solution:
-          'Structured the application into reusable UI components and connected the different services through the application layer.'
-      },
-
-      {
-        problem:
-          'Location and API-driven information needs to be displayed without making the interface difficult to use.',
-
-        solution:
-          'Focused on a simple mobile-first interface and clear application states for loading, data and user interaction.'
-      }
-    ],
-
-    result:
-      'Contributed to the development of a production mobile application for GPS and location-based services.',
-
-    screenshots: [
-      {
-        title: 'Login & Authentication',
-
-        description:
-          'Login screen for entering user credentials and accessing the application.',
-
-        image: '~/projects/smart-gps/login.png'
-      },
-
-      {
-        title: 'GPS Application',
-
-        description:
-          'Mobile interface for GPS and location-related functionality.'
-      },
-
-      {
-        title: 'Map & Location',
-
-        description:
-          'Map-based interface using location and geographic information.'
-      }
-    ],
-
-    links: {
-      github: '',
-      demo: '',
-      playStore: ''
-    }
-  },
-
-  {
-    title: 'Smart Data Table Plus',
-
-    slug: 'smart-data-table-plus',
-
-    type: 'Open Source Package',
-
-    year: '2026',
-
-    role: 'Creator / Developer',
-
-    status: 'Open Source',
-
-    description:
-      'A customizable Flutter data table package with pagination, sorting, responsive layouts and scrolling.',
-
-    longDescription:
-      'Smart Data Table Plus is a reusable Flutter package designed to make complex data-table interfaces easier to build. It focuses on customization, responsive layouts, pagination, sorting and table interaction.',
-
-    icon: '▦',
-
-    gradient: 'from-violet-500 via-purple-500 to-indigo-600',
-
-    tags: [
-      'Flutter',
-      'Dart',
-      'Open Source'
-    ],
-
-    technologies: [
-      'Flutter',
-      'Dart',
-      'Generics',
-      'Pagination',
-      'Sorting',
-      'Responsive UI',
-      'Reusable Components'
-    ],
-
-    features: [
-      'Customizable table UI',
-      'Pagination',
-      'Sorting',
-      'Responsive layout',
-      'Horizontal scrolling',
-      'Vertical scrolling',
-      'Reusable generic data model',
-      'Custom table columns'
-    ],
-
-    responsibilities: [
-      'Designed the package API',
-      'Built the reusable Flutter data-table component',
-      'Implemented pagination support',
-      'Implemented sorting functionality',
-      'Worked on responsive table layouts',
-      'Designed customizable table columns',
-      'Improved scrolling behavior',
-      'Created example usage for developers',
-      'Prepared the package for public distribution'
-    ],
-
-    challenges: [
-      {
-        problem:
-          'Standard data tables can become difficult to customize when applications require pagination, sorting and responsive behavior.',
-
-        solution:
-          'Built a reusable component with configurable columns, rows, pagination and interaction behavior.'
-      },
-
-      {
-        problem:
-          'Large tables need to remain usable across different screen sizes.',
-
-        solution:
-          'Added responsive layout behavior and scrolling support so the component can adapt to different application layouts.'
-      }
-    ],
-
-    result:
-      'Created a reusable Flutter package intended to help developers build customizable and responsive data-table interfaces.',
-
-    screenshots: [
-      {
-        title: 'Smart Data Table',
-
-        description:
-          'Example of the customizable data-table interface.'
-      },
-
-      {
-        title: 'Pagination',
-
-        description:
-          'Table pagination interface for navigating large datasets.'
-      },
-
-      {
-        title: 'Responsive Table',
-
-        description:
-          'Responsive table layout with scrolling and customizable columns.'
-      }
-    ],
-
-    links: {
-      github: 'https://github.com/Nget-Sophun'
-    }
-  },
-
-  {
-    title: 'EZ Remote',
-
-    slug: 'ez-remote',
-
-    type: 'Robotics / IoT',
-
-    year: '2026',
-
-    role: 'Mobile Developer',
-
-    status: 'Development',
-
-    description:
-      'A Bluetooth remote-control application for RC projects with joystick control and ESP32 integration.',
-
-    longDescription:
-      'EZ Remote is a Flutter-based remote-control application designed to communicate with RC hardware. The project combines mobile development with Bluetooth communication and embedded hardware such as ESP32.',
-
-    icon: '⌁',
-
-    gradient: 'from-orange-500 via-red-500 to-rose-600',
-
-    tags: [
-      'Flutter',
-      'Bluetooth',
-      'ESP32'
-    ],
-
-    technologies: [
-      'Flutter',
-      'Dart',
-      'Bluetooth',
-      'ESP32',
-      'Joystick',
-      'Embedded Systems'
-    ],
-
-    features: [
-      'Bluetooth connection',
-      'Joystick control',
-      'Remote vehicle control',
-      'Connection management',
-      'Speed control',
-      'Battery information',
-      'ESP32 communication'
-    ],
-
-    responsibilities: [
-      'Designed the remote-control mobile interface',
-      'Implemented joystick interaction',
-      'Worked on Bluetooth communication',
-      'Implemented connection and reconnection behavior',
-      'Designed controls for RC vehicle movement',
-      'Worked with ESP32 hardware communication',
-      'Designed the application for landscape driving mode'
-    ],
-
-    challenges: [
-      {
-        problem:
-          'The mobile application needs to communicate with external hardware with low interaction latency.',
-
-        solution:
-          'Designed the application around direct Bluetooth communication and simplified control interactions.'
-      },
-
-      {
-        problem:
-          'Driving interfaces need large and accessible controls.',
-
-        solution:
-          'Designed a control-oriented interface using joystick interaction and landscape orientation.'
-      }
-    ],
-
-    result:
-      'Developed a Flutter-based remote-control application that connects mobile controls with RC hardware through Bluetooth and ESP32.',
-
-    screenshots: [
-      {
-        title: 'Remote Control',
-
-        description:
-          'Main interface for controlling the RC vehicle.'
-      },
-
-      {
-        title: 'Joystick',
-
-        description:
-          'Joystick-based interaction for vehicle movement.'
-      },
-
-      {
-        title: 'Bluetooth Connection',
-
-        description:
-          'Connection interface for communicating with the RC hardware.'
-      }
-    ],
-
-    links: {
-      github: 'https://github.com/Nget-Sophun/EZ-Remote'
-    }
-  },
-
-  {
-    title: 'KotMe',
-
-    slug: 'kotme',
-
-    type: 'Productivity Application',
-
-    year: '2026',
-
-    role: 'Mobile Developer',
-
-    status: 'Development',
-
-    description:
-      'A modern productivity application for notes and tasks with categories, reminders and rich text editing.',
-
-    longDescription:
-      'KotMe is a productivity application focused on helping users manage notes and tasks. The application combines task management, categories, rich text editing and reminders in a single mobile experience.',
-
-    icon: '✓',
-
-    gradient: 'from-pink-500 via-rose-500 to-orange-500',
-
-    tags: [
-      'Flutter',
-      'Firebase',
-      'GetX'
-    ],
-
-    technologies: [
-      'Flutter',
-      'Dart',
-      'Firebase',
-      'GetX',
-      'FlutterQuill',
-      'Notifications'
-    ],
-
-    features: [
-      'Notes',
-      'Tasks',
-      'Task categories',
-      'Task priorities',
-      'Subtasks',
-      'Rich text editing',
-      'Authentication',
-      'Reminders',
-      'Task status management'
-    ],
-
-    responsibilities: [
-      'Designed application screens',
-      'Built task management interfaces',
-      'Implemented notes functionality',
-      'Implemented task categories and priorities',
-      'Built rich text editing functionality',
-      'Integrated Firebase authentication',
-      'Worked on notifications and reminders',
-      'Implemented task state management'
-    ],
-
-    challenges: [
-      {
-        problem:
-          'Users need to manage both notes and tasks without making the application complicated.',
-
-        solution:
-          'Organized information using categories, filters, priorities and clear task states.'
-      },
-
-      {
-        problem:
-          'Rich text editing requires a different interaction model from normal text input.',
-
-        solution:
-          'Integrated a rich text editor into the note workflow while keeping the surrounding UI simple.'
-      }
-    ],
-
-    result:
-      'Built a productivity-focused mobile application combining notes, tasks, rich text editing and reminders.',
-
-    screenshots: [
-      {
-        title: 'Notes',
-
-        description:
-          'Interface for managing personal notes.'
-      },
-
-      {
-        title: 'Tasks',
-
-        description:
-          'Task management interface with status, categories and priorities.'
-      },
-
-      {
-        title: 'Rich Text Editor',
-
-        description:
-          'Rich text editing experience for creating detailed notes.'
-      }
-    ],
-
-    links: {}
-  },
-
-  {
-    title: 'Smart Converter',
-
-    slug: 'smart-converter',
-
-    type: 'Web Tool',
-
-    year: '2026',
-
-    role: 'Developer',
-
-    status: 'Completed',
-
-    description:
-      'A developer utility tool for JSON formatting, Base64 conversion and image-to-Base64 conversion.',
-
-    longDescription:
-      'Smart Converter is a browser-based developer utility that provides common conversion tools in a simple interface. It is designed to make repetitive development tasks faster and easier.',
-
-    icon: '{}',
-
-    gradient: 'from-cyan-500 via-blue-500 to-indigo-600',
-
-    tags: [
-      'Flutter Web',
-      'Dart',
-      'Developer Tool'
-    ],
-
-    technologies: [
-      'Flutter Web',
-      'Dart',
-      'JSON',
-      'Base64'
-    ],
-
-    features: [
-      'JSON formatter',
-      'JSON viewer',
-      'Base64 conversion',
-      'Image to Base64 conversion',
-      'Developer-focused interface'
-    ],
-
-    responsibilities: [
-      'Designed the developer-tool interface',
-      'Implemented JSON formatting functionality',
-      'Implemented Base64 conversion',
-      'Implemented image-to-Base64 conversion',
-      'Designed responsive web layouts'
-    ],
-
-    challenges: [
-      {
-        problem:
-          'Developer utilities need to present technical data clearly without unnecessary UI complexity.',
-
-        solution:
-          'Designed a focused interface around input, conversion and output workflows.'
-      }
-    ],
-
-    result:
-      'Created a lightweight browser-based developer utility for common data conversion tasks.',
-
-    screenshots: [
-      {
-        title: 'JSON Formatter',
-
-        description:
-          'Format and inspect JSON data directly in the browser.'
-      },
-
-      {
-        title: 'Base64 Converter',
-
-        description:
-          'Convert data to and from Base64.'
-      }
-    ],
-
-    links: {}
-  },
-
-  {
-    title: 'Merchant App',
-
-    slug: 'merchant-app',
-
-    type: 'Mobile Application',
-
-    year: '2024',
-
-    role: 'Mobile Developer',
-
-    status: 'Production',
-
-    description:
-      'A production mobile application for merchants with responsive UI, API integration and state management.',
-
-    longDescription:
-      'Merchant App is a production-oriented mobile application designed for merchant workflows. The application combines responsive mobile UI, backend API integration and application state management.',
-
-    icon: '◈',
-
-    gradient: 'from-blue-500 via-cyan-500 to-teal-500',
-
-    tags: [
-      'Flutter',
-      'BLoC',
-      'REST API'
-    ],
-
-    technologies: [
-      'Flutter',
-      'Dart',
-      'BLoC',
-      'REST API',
-      'Responsive UI'
-    ],
-
-    features: [
-      'Merchant workflows',
-      'REST API integration',
-      'State management',
-      'Responsive mobile UI',
-      'Production application architecture'
-    ],
-
-    responsibilities: [
-      'Developed Flutter application screens',
-      'Integrated REST APIs',
-      'Worked with BLoC state management',
-      'Implemented responsive layouts',
-      'Handled application states and API responses'
-    ],
-
-    challenges: [
-      {
-        problem:
-          'Production mobile applications need predictable state transitions when working with remote APIs.',
-
-        solution:
-          'Used structured state management and clear UI states for API-driven workflows.'
-      }
-    ],
-
-    result:
-      'Contributed to a production mobile application for merchant workflows.',
-
-    screenshots: [
-      {
-        title: 'Merchant Interface',
-
-        description:
-          'Mobile interface for merchant workflows.'
-      },
-
-      {
-        title: 'API-driven Screen',
-
-        description:
-          'Application screen connected to backend services.'
-      }
-    ],
-
-    links: {}
-  }
+const navOpen = ref(false)
+const scrolled = ref(false)
+
+const navLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Contact', href: '#contact' }
 ]
 
-/* =========================================================
-   SKILLS
-========================================================= */
+const socials = [
+  { label: 'Facebook', href: 'https://web.facebook.com/Nget.Sophun.1' },
+  { label: 'GitHub', href: 'https://github.com/Ngetsophun' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nget-sophun-854b8b24a' },
+  { label: 'Telegram', href: 'https://t.me/PhunZz' }
+]
 
 const skills = [
-  {
-    name: 'Flutter',
-    level: 'Advanced',
-    icon: 'F'
-  },
-  {
-    name: 'Vue / Nuxt',
-    level: 'Advanced',
-    icon: 'V'
-  },
-  {
-    name: 'JavaScript',
-    level: 'Advanced',
-    icon: 'JS'
-  },
-  {
-    name: 'TypeScript',
-    level: 'Intermediate',
-    icon: 'TS'
-  },
-  {
-    name: 'Java',
-    level: 'Intermediate',
-    icon: 'J'
-  },
-  {
-    name: 'Node.js',
-    level: 'Intermediate',
-    icon: 'N'
-  },
-  {
-    name: 'Spring Boot',
-    level: 'Intermediate',
-    icon: 'S'
-  },
-  {
-    name: 'Docker',
-    level: 'Intermediate',
-    icon: 'D'
-  }
+  { name: 'Flutter & Dart', level: 85 },
+  { name: 'MVC/MVVM Architecture & Design Patterns', level: 75 },
+  { name: 'State Management (BLoC, GetX, Riverpod)', level: 75 },
+  { name: 'RESTful APIs & JSON', level: 80 },
+  { name: 'Firebase Authentication & Cloud Services', level: 75 },
+  { name: 'Java, Kotlin, Jetpack Compose', level: 65 },
+  { name: 'Backend Development (Node.js, Express.js, Laravel, Spring Boot)', level: 60 },
+  { name: 'MySQL & SQL Server', level: 65 },
+  { name: 'Robotics & Internet of Things (IoT)', level: 80 },
+  { name: 'Google Maps & WebSocket Integration', level: 70 }
 ]
 
-/* =========================================================
-   EXPERIENCE
-========================================================= */
+const stack = [
+  'Flutter', 'Dart', 'Java', 'Kotlin', 'Node.js', 'Laravel', 'Spring Boot',
+  'Firebase', 'MySQL', 'SQL Server', 'Git', 'GitHub', 'GitLab', 'Trello',
+  'Arduino / IoT'
+]
 
-const experiences = [
+const experience = [
   {
-    date: '2024 — Present',
+    year: '2025 — Present',
     role: 'Mobile Developer',
-    company: 'Turbo Tech',
-
-    description:
-      'Developing production mobile applications using Flutter and Dart. Working with REST APIs, Google Maps, responsive layouts, notifications, state management and application architecture.',
-
-    tags: [
-      'Flutter',
-      'Dart',
-      'BLoC',
-      'REST API'
+    org: 'Canadia Bank',
+    points: [
+      'Developed a cross-platform property evaluation application (PEDS) using Flutter.',
+      'Implemented Google Maps with custom markers, polygons, and GPS tracking.',
+      'Integrated REST APIs for property data management.',
+      'Built property inspection, valuation, and reporting modules.',
+      'Optimized application performance and enhanced user experience.',
+      'Gained working knowledge of the T24 core banking system to support integration and data flow.',
+      'Collaborated with cross-functional teams in an Agile environment.',
+      'Performed automated testing using Katalon Studio to improve release quality.',
+      'Maintained, supported, and enhanced feature development for the Center of Excellent (COE) App.',
+      'Fixed bugs and improved application stability for the COE App.',
+      'Maintained, supported, and enhanced the Customer Feedback web application.',
+      'Developed a chat application using polling for near real-time messaging (CNB-IM).',
+      'Optimized application performance and enhanced user experience for CNB-IM.'
     ]
   },
-
-  {
-    date: '2022 — Present',
-    role: 'Education & Robotics Team Member',
-    company: 'E-Robot',
-
-    description:
-      'Researching robotics and emerging technologies while mentoring students and contributing to IoT, AI and robotics projects.',
-
-    tags: [
-      'Robotics',
-      'AI',
-      'IoT',
-      'Education'
+   {
+    year: 'Present',
+    role: 'Freelance Mobile Developer',
+    org: 'Damra Team',
+    points: [
+       'Designed and built Damra, a gamified learning app, independently using Flutter and Dart.',
+    'Built a level-based progression system with points, badges, and unlockable content to drive engagement.',
+    'Developed real-time global and group leaderboards for competitive, social learning.',
+    'Designed interactive quizzes and structured, progressive learning paths.',
+    'Integrated REST APIs and Firebase for data, authentication, and real-time updates.',
+    "Owned the app's development independently, from planning through testing."
     ]
   },
-
   {
-    date: '2023',
-    role: 'Software Development Intern',
-    company: 'Blue Technology',
-
-    description:
-      'Worked on a POS system using Java and MVC architecture with responsibility for UI, application structure and local database integration.',
-
-    tags: [
-      'Java',
-      'MVC',
-      'Database'
+    year: '2024 — 2025',
+    role: 'Mobile Developer',
+    org: 'Turbo Tech',
+    points: [
+      'Built the Merchant App with Flutter and the BLoC pattern, from screen design to API integration.',
+      'Developed the Red Ant customer e-commerce app — UI, Google Maps and REST API.',
+      'Built the Driver App and a Smart GPS App, handling UI, notifications and map integration.',
+      'Ensured responsive layouts across tablet and mobile screens.'
     ]
-  }
-]
-
-/* =========================================================
-   EDUCATION
-========================================================= */
-
-const education = [
-  {
-    year: '2020 — Present',
-
-    title: 'Bachelor of Computer Science',
-
-    school: 'Royal University of Phnom Penh',
-
-    description:
-      'Computer Science and Software Engineering with a focus on software development and modern technology.'
   },
-
   {
     year: '2023',
-
-    title: 'Full-Stack Development',
-
-    school: 'New Information Technology',
-
-    description:
-      'Studied full-stack web development and modern application development.'
-  }
+    role: 'Software Intern',
+    org: 'Blue Technology',
+    points: [
+      'Developed a POS System in Java using the MVC pattern.',
+      'Designed the app structure and connected it to a local Room database.'
+    ]
+  },
+  {
+  year: '2022 — 2025',
+  role: 'Robotics & Education Team',
+  org: 'E-Robot',
+  points: [
+    'Led the E-Robot team and headed the STEM for Youth project.',
+    'Developed a mobile application for controlling robots.',
+    'Built robots for exhibitions, competitions, and demonstrations, including an IoT smart-home controlled by hand, voice and face recognition.',
+    'Developed IoT applications to control robots via mobile devices.',
+    'Integrated AI features including hand gesture, voice, and face recognition, including a face-recognition wake-up alarm system.',
+    'Collaborated on robotics research and development projects.',
+    'Programmed and taught robotics to children in rural areas including Ratanakiri, Takeo, Battambang, and Phnom Penh.',
+    'Mentored Python and Flutter courses, and participated in robotics competitions.'
+  ]
+}
 ]
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const navItems = [
-  {
-    label: 'Home',
-    href: '#home'
-  },
-
-  {
-    label: 'About',
-    href: '#about'
-  },
-
-  {
-    label: 'Skills',
-    href: '#skills'
-  },
-
-  {
-    label: 'Projects',
-    href: '#projects'
-  },
-
-  {
-    label: 'Experience',
-    href: '#experience'
-  },
-
-  {
-    label: 'Contact',
-    href: '#contact'
-  }
+const education = [
+  { year: '2020 — 2024', title: 'Bachelor of Computer Science & Software Engineering', org: 'Royal University of Phnom Penh' },
+  { year: '2023', title: 'Full-Stack Development', org: 'New Information Technology (NIT)' },
+  { year: '2022 — 2023', title: 'Mentor Python Programming Course, Dart and Flutter Course, Robotics Course, PCB Design', org: 'E-Robot' },
+  { year: '2021 — 2022', title: 'C/C++, Java & Web Development', org: 'Etec Center' }
 ]
 
-/* =========================================================
-   FUNCTIONS
-========================================================= */
-
-const toggleTheme = () => {
-  isDark.value = !isDark.value
-
-  document.documentElement.classList.toggle(
-    'dark',
-    isDark.value
-  )
-
-  document.documentElement.classList.toggle(
-    'light',
-    !isDark.value
-  )
-
-  localStorage.setItem(
-    'portfolio-theme',
-    isDark.value ? 'dark' : 'light'
-  )
+const projects = [
+  {
+    title: 'Smart GPS App',
+    tag: 'Flutter · Google Maps · REST API',
+    desc: 'Real-time GPS tracking app built with Flutter, integrating live maps and location APIs.',
+    img: 'https://ngetsophun.netlify.app/assets/img/gps_app1.png'
+  },
+  {
+    title: 'Merchant App',
+    tag: 'Flutter · BLoC · Internal Storage',
+    desc: 'Merchant-facing app for Turbo Tech — screen design, app structure and data/API access.',
+    img: 'https://ngetsophun.netlify.app/assets/img/merchat_app1.png'
+  },
+  {
+    title: 'Driver App',
+    tag: 'Flutter · Notifications · REST API',
+    desc: 'Driver app handling live jobs and notifications, built end-to-end with Flutter and Dart.',
+    img: 'https://ngetsophun.netlify.app/assets/img/driver_app1.png'
+  },
+  {
+    title: 'Red Ant Customer App',
+    tag: 'Flutter · Google Maps · REST API',
+    desc: 'E-commerce customer app with map-based ordering and a fully custom UI.',
+    img: 'https://ngetsophun.netlify.app/assets/img/customer_app1.png'
+  },
+  
+  {
+    title: 'Damra App',
+    tag: 'Flutter · Gamification · Firebase',
+    desc: 'A gamified learning platform with levels, badges, and real-time leaderboards to make learning fun and competitive.',
+    img: 'https://ngetsophun.netlify.app/assets/img/damra_app.png'
+  },
+  {
+  title: 'E-Robot',
+  tag: 'IoT · AI · Python · Flutter',
+  desc: 'Developed an AI-powered IoT system for controlling robots and smart home devices through mobile applications, featuring hand gesture, voice, and face recognition.',
+  video: '/assets/video/smart_home.mp4'
+},
+  {
+    title: 'Properties Evaluation (PEDS)',
+    tag: 'Flutter · Google Maps · REST API',
+    desc: 'A property evaluation app with GPS tracking, custom map markers, and tools for inspection, valuation, and reporting.',
+    img: 'https://ngetsophun.netlify.app/assets/img/peds_app.png'
+  },
+  {
+    title: 'Center of Excellent (COE)',
+    tag: 'Flutter · Maintenance · Feature Enhancement',
+    desc: 'An internal app maintained and enhanced with new features and bug fixes to improve stability and usability.',
+    img: 'https://ngetsophun.netlify.app/assets/img/coe_app.png'
+  },
+  {
+    title: 'Customer Feedback',
+    tag: 'Web App · Maintenance',
+    desc: 'A customer feedback web application, supported and enhanced to improve reliability and user experience.',
+    img: 'https://ngetsophun.netlify.app/assets/img/feedback_app.png'
+  },
+  {
+    title: 'Canadia Bank Internal Message (CNB-IM)',
+    tag: 'Flutter · Real-time Messaging',
+    desc: 'An internal chat application using polling for near real-time messaging between bank staff.',
+    img: 'https://ngetsophun.netlify.app/assets/img/cnb_im_app.png'
+  },
+  {
+  title: 'Smart Data Table Plus',
+  tag: 'Flutter · Dart Package · pub.dev',
+  desc: 'A responsive, customizable Flutter data table with pagination, sorting, and adaptive layouts — published as an open-source package on pub.dev.',
+  img: 'https://raw.githubusercontent.com/Nget-Sophun/smart_data_table_plus/main/example/assets/table.png',
+  url: 'https://pub.dev/packages/smart_data_table_plus'
+  },
+  {
+  title: 'Google Map Custom Info Widow',
+  tag: 'Flutter · Dart Package · pub.dev',
+  desc: 'A customizable Flutter package for displaying custom info windows on Google Maps markers, supporting custom widgets, dynamic resizing, close buttons, and Android, iOS, and Web.',
+  img: 'https://raw.githubusercontent.com/Ngetsophun/google_map_custom_info_widow/main/example/assets/img_demo.png',
+  url: 'https://pub.dev/packages/google_map_custom_info_widow'
+},
+{
+  title: 'Google Map Dotted Polygon',
+  tag: 'Flutter · Dart Package · pub.dev',
+  desc: 'A lightweight Flutter package for drawing dotted or dashed polygons on Google Maps with customizable colors, gaps, and stroke widths for map zones, areas, and custom boundaries.',
+  img: 'https://raw.githubusercontent.com/Ngetsophun/google_map_dotted_polygon/main/example/assets/screenshot.jpg',
+  url: 'https://pub.dev/packages/google_map_dotted_polygon'
+},
+{
+  title: 'Google Map Drawer',
+  tag: 'Flutter · Dart Package · pub.dev',
+  desc: 'A Flutter package for drawing polygons on Google Maps and managing locations, with support for interactive area drawing, clearing points, and saving custom map areas.',
+  img: 'https://raw.githubusercontent.com/Ngetsophun/google_map_drawer/main/example/assets/img_map.png',
+  url: 'https://pub.dev/packages/google_map_drawer'
 }
 
-const scrollTo = (href: string) => {
-  mobileMenuOpen.value = false
 
-  const element = document.querySelector(href)
+]
 
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth'
-    })
-  }
+function handleScroll() {
+  scrolled.value = window.scrollY > 24
 }
 
-const openProject = (project: Project) => {
-  selectedProject.value = project
-
-  document.body.style.overflow = 'hidden'
-}
-
-const closeProject = () => {
-  selectedProject.value = null
-
-  document.body.style.overflow = ''
-}
-
-/* =========================================================
-   LIFECYCLE
-========================================================= */
-
-onMounted(() => {
-  const savedTheme =
-    localStorage.getItem('portfolio-theme')
-
-  if (savedTheme === 'light') {
-    isDark.value = false
-  } else {
-    isDark.value = true
-  }
-
-  document.documentElement.classList.toggle(
-    'dark',
-    isDark.value
-  )
-
-  document.documentElement.classList.toggle(
-    'light',
-    !isDark.value
-  )
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeProject()
-    }
-  })
-})
+onMounted(() => window.addEventListener('scroll', handleScroll))
+onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
 <template>
-  <div
-    class="min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100 transition-colors duration-500"
-  >
+  <div class="min-h-screen bg-ink text-paper font-body antialiased">
 
-    <!-- =====================================================
-         BACKGROUND
-    ====================================================== -->
-
-    <div
-      class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-    >
-      <div
-        class="absolute left-[-180px] top-[-180px] h-[450px] w-[450px] rounded-full bg-violet-600/10 blur-3xl"
-      />
-
-      <div
-        class="absolute right-[-180px] top-[25%] h-[450px] w-[450px] rounded-full bg-cyan-600/10 blur-3xl"
-      />
-
-      <div
-        class="absolute bottom-[-200px] left-[30%] h-[500px] w-[500px] rounded-full bg-indigo-600/10 blur-3xl"
-      />
-    </div>
-
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
-
+    <!-- NAV -->
     <header
-      class="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl"
+      class="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
+      :class="scrolled ? 'bg-ink/90 backdrop-blur border-b border-line' : 'bg-transparent'"
     >
-      <div class="section-container">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#home" class="font-display text-lg font-semibold tracking-tight">
+          Nget<span class="text-gold">.</span>Sophun
+        </a>
 
-        <nav
-          class="flex h-18 items-center justify-between"
-        >
-
-          <!-- Logo -->
-
-          <button
-            class="group flex items-center gap-3"
-            @click="scrollTo('#home')"
+        <nav class ="hidden gap-6 font-mono text-sm md:flex">
+          <a
+            v-for="link in navLinks"
+            :key="link.label"
+            :href="link.href"
+            class="transition-colors hover:text-gold"
           >
-            <div
-              class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-sm font-black text-zinc-950 shadow-lg shadow-violet-500/10"
-            >
-              NS
-            </div>
-
-            <div class="hidden text-left sm:block">
-              <div class="text-sm font-bold">
-                Nget Sophun
-              </div>
-
-              <div class="text-xs text-zinc-500">
-                Developer
-              </div>
-            </div>
-          </button>
-
-          <!-- Desktop navigation -->
-
-          <div
-            class="hidden items-center gap-1 lg:flex"
-          >
-            <button
-              v-for="item in navItems"
-              :key="item.href"
-              class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition hover:bg-white/5 hover:text-white"
-              @click="scrollTo(item.href)"
-            >
-              {{ item.label }}
-            </button>
-          </div>
-
-          <!-- Right -->
-
-          <div class="flex items-center gap-2">
-
-            <!-- Theme -->
-
-            <button
-              aria-label="Toggle theme"
-              class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-300 transition hover:border-violet-500 hover:text-violet-400"
-              @click="toggleTheme"
-            >
-              <span v-if="isDark">
-                ☀
-              </span>
-
-              <span v-else>
-                ☾
-              </span>
-            </button>
-
-            <!-- Mobile -->
-
-            <button
-              class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 lg:hidden"
-              @click="
-                mobileMenuOpen = !mobileMenuOpen
-              "
-            >
-              <span class="text-xl">
-                {{ mobileMenuOpen ? '×' : '☰' }}
-              </span>
-            </button>
-
-            <!-- CTA -->
-
-            <button
-              class="hidden rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-zinc-950 transition hover:-translate-y-0.5 hover:bg-violet-400 sm:block"
-              @click="scrollTo('#contact')"
-            >
-              Let's talk
-            </button>
-          </div>
+            {{ link.label }}
+          </a>
         </nav>
 
-        <!-- Mobile navigation -->
-
-        <div
-          v-if="mobileMenuOpen"
-          class="border-t border-white/10 py-4 lg:hidden"
+        <a
+          href="#contact"
+          class="hidden rounded-full border border-gold/40 px-5 py-2 font-mono text-xs uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-ink md:inline-block"
         >
-          <div class="grid gap-1">
+          Hire me
+        </a>
 
-            <button
-              v-for="item in navItems"
-              :key="item.href"
-              class="rounded-lg px-4 py-3 text-left text-sm font-medium text-zinc-400 hover:bg-white/5 hover:text-white"
-              @click="scrollTo(item.href)"
-            >
-              {{ item.label }}
-            </button>
 
-          </div>
-        </div>
 
+        <button
+          class="flex flex-col gap-1.5 md:hidden"
+          aria-label="Toggle menu"
+          @click="navOpen = !navOpen"
+        >
+          <span class="h-0.5 w-6 bg-paper transition-transform" :class="navOpen && 'translate-y-2 rotate-45'"></span>
+          <span class="h-0.5 w-6 bg-paper transition-opacity" :class="navOpen && 'opacity-0'"></span>
+          <span class="h-0.5 w-6 bg-paper transition-transform" :class="navOpen && '-translate-y-2 -rotate-45'"></span>
+        </button>
+      </div>
+
+      <div v-if="navOpen" class="border-t border-line bg-ink px-6 py-4 md:hidden">
+      <a
+        v-for="link in navLinks"
+        :key="link.label"
+        :href="link.href"
+        class="block py-2 text-sm transition-colors hover:text-gold"
+         @click="navOpen = false">
+         {{ link.label }}
+        </a>
+        
       </div>
     </header>
 
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <main id="home">
-
-      <!-- ===================================================
-           HERO
-      ==================================================== -->
-
-      <section
-        class="grid-background relative flex min-h-screen items-center pt-28"
-      >
-
-        <div class="section-container py-20">
-
-          <div
-            class="grid items-center gap-14 lg:grid-cols-[1.25fr_.75fr]"
-          >
-
-            <!-- LEFT -->
-
-            <div>
-
-              <div
-                class="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-2 text-sm text-emerald-400"
-              >
-
-                <span class="relative flex h-2 w-2">
-
-                  <span
-                    class="pulse-ring absolute inline-flex h-full w-full rounded-full bg-emerald-400"
-                  />
-
-                  <span
-                    class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"
-                  />
-
-                </span>
-
-                Available for opportunities
-
-              </div>
-
-              <p
-                class="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-              >
-                Hello, I'm
-              </p>
-
-              <h1
-                class="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
-              >
-                Nget
-
-                <span class="gradient-text">
-                  Sophun.
-                </span>
-              </h1>
-
-              <h2
-                class="mt-7 text-2xl font-bold text-zinc-300 sm:text-3xl"
-              >
-                I build digital products
-                <span class="text-violet-500">
-                  .
-                </span>
-              </h2>
-
-              <p
-                class="mt-6 max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg"
-              >
-                I'm a developer from Cambodia focused on
-                building modern mobile and web
-                applications. I enjoy turning ideas into
-                clean, useful and scalable products with
-                <span class="font-semibold text-zinc-200">
-                  Flutter, Vue, Nuxt and modern
-                  technologies.
-                </span>
-              </p>
-
-              <!-- Buttons -->
-
-              <div
-                class="mt-9 flex flex-wrap gap-3"
-              >
-
-                <button
-                  class="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-zinc-950 shadow-xl transition hover:-translate-y-1 hover:bg-violet-400"
-                  @click="scrollTo('#projects')"
-                >
-                  View my work
-
-                  <span
-                    class="transition-transform group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </button>
-
-                <a
-                  href="/cv.pdf"
-                  download
-                  class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-bold text-zinc-200 transition hover:-translate-y-1 hover:border-violet-500 hover:text-violet-400"
-                >
-                  Download CV
-
-                  <span>
-                    ↓
-                  </span>
-                </a>
-
-              </div>
-
-              <!-- Social -->
-
-              <div
-                class="mt-10 flex items-center gap-5 text-sm text-zinc-500"
-              >
-
-                <span>
-                  Find me on
-                </span>
-
-                <a
-                  href="https://github.com/Nget-Sophun"
-                  target="_blank"
-                  class="font-semibold transition hover:text-violet-400"
-                >
-                  GitHub
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/"
-                  target="_blank"
-                  class="font-semibold transition hover:text-violet-400"
-                >
-                  LinkedIn
-                </a>
-
-              </div>
-
-            </div>
-
-            <!-- RIGHT CODE CARD -->
-
-            <div
-              class="relative hidden lg:block"
-            >
-
-              <div
-                class="animate-float relative mx-auto w-full max-w-md"
-              >
-
-                <div
-                  class="absolute inset-10 rounded-full bg-violet-500/20 blur-3xl"
-                />
-
-                <div
-                  class="glass relative overflow-hidden rounded-[2rem] border border-white/10 p-8 shadow-2xl shadow-violet-500/10"
-                >
-
-                  <div
-                    class="flex items-center justify-between"
-                  >
-
-                    <div class="flex gap-2">
-                      <span
-                        class="h-3 w-3 rounded-full bg-red-400"
-                      />
-
-                      <span
-                        class="h-3 w-3 rounded-full bg-yellow-400"
-                      />
-
-                      <span
-                        class="h-3 w-3 rounded-full bg-green-400"
-                      />
-                    </div>
-
-                    <span
-                      class="font-mono text-xs text-zinc-500"
-                    >
-                      developer.ts
-                    </span>
-
-                  </div>
-
-                  <div
-                    class="mt-10 font-mono text-sm leading-8"
-                  >
-
-                    <div>
-                      <span class="text-violet-400">
-                        const
-                      </span>
-
-                      <span class="text-blue-400">
-                        developer
-                      </span>
-
-                      =
-
-                      <span class="text-orange-400">
-                        {
-                      </span>
-                    </div>
-
-                    <div class="pl-5">
-                      <span class="text-zinc-500">
-                        name:
-                      </span>
-
-                      <span class="text-emerald-400">
-                        "Nget Sophun"
-                      </span>
-                    </div>
-
-                    <div class="pl-5">
-                      <span class="text-zinc-500">
-                        role:
-                      </span>
-
-                      <span class="text-emerald-400">
-                        "Developer"
-                      </span>
-                    </div>
-
-                    <div class="pl-5">
-                      <span class="text-zinc-500">
-                        location:
-                      </span>
-
-                      <span class="text-emerald-400">
-                        "Cambodia"
-                      </span>
-                    </div>
-
-                    <div class="pl-5">
-                      <span class="text-zinc-500">
-                        focus:
-                      </span>
-
-                      <span class="text-emerald-400">
-                        "Building"
-                      </span>
-                    </div>
-
-                    <div>
-                      <span class="text-orange-400">
-                        }
-                      </span>
-                    </div>
-
-                  </div>
-
-                  <div
-                    class="mt-10 grid grid-cols-4 gap-3"
-                  >
-
-                    <div
-                      v-for="tech in [
-                        'Vue',
-                        'Nuxt',
-                        'Flutter',
-                        'TS'
-                      ]"
-                      :key="tech"
-                      class="rounded-xl border border-white/10 bg-white/5 p-3 text-center text-xs font-bold"
-                    >
-                      {{ tech }}
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ===================================================
-           ABOUT
-      ==================================================== -->
-
-      <section
-        id="about"
-        class="border-t border-white/10 py-28"
-      >
-
-        <div class="section-container">
-
-          <div
-            class="grid gap-14 lg:grid-cols-[.8fr_1.2fr]"
-          >
-
-            <div>
-
-              <p
-                class="text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-              >
-                About me
-              </p>
-
-              <h2
-                class="mt-4 text-4xl font-black tracking-tight sm:text-5xl"
-              >
-                More than
-
-                <span class="gradient-text">
-                  just code.
-                </span>
-              </h2>
-
-            </div>
-
-            <div>
-
-              <p
-                class="text-lg leading-9 text-zinc-400"
-              >
-                I'm a Computer Science student and
-                developer passionate about technology,
-                software development and building useful
-                products.
-              </p>
-
-              <p
-                class="mt-6 text-lg leading-9 text-zinc-400"
-              >
-                My main experience is in mobile development
-                with Flutter, while I'm also expanding deeply
-                into modern web development with Vue, Nuxt
-                and TypeScript.
-              </p>
-
-              <p
-                class="mt-6 text-lg leading-9 text-zinc-400"
-              >
-                Outside of software development, I enjoy
-                robotics, IoT, electronics and experimenting
-                with AI-powered projects.
-              </p>
-
-              <div
-                class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
-              >
-
-                <div
-                  class="rounded-2xl border border-white/10 p-5"
-                >
-                  <div class="text-3xl font-black">
-                    3+
-                  </div>
-
-                  <div class="mt-1 text-xs text-zinc-500">
-                    Years coding
-                  </div>
-                </div>
-
-                <div
-                  class="rounded-2xl border border-white/10 p-5"
-                >
-                  <div class="text-3xl font-black">
-                    10+
-                  </div>
-
-                  <div class="mt-1 text-xs text-zinc-500">
-                    Projects
-                  </div>
-                </div>
-
-                <div
-                  class="rounded-2xl border border-white/10 p-5"
-                >
-                  <div class="text-3xl font-black">
-                    8+
-                  </div>
-
-                  <div class="mt-1 text-xs text-zinc-500">
-                    Technologies
-                  </div>
-                </div>
-
-                <div
-                  class="rounded-2xl border border-white/10 p-5"
-                >
-                  <div class="text-3xl font-black">
-                    ∞
-                  </div>
-
-                  <div class="mt-1 text-xs text-zinc-500">
-                    Curiosity
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ===================================================
-           SKILLS
-      ==================================================== -->
-
-      <section
-        id="skills"
-        class="border-y border-white/10 bg-white/[0.02] py-28"
-      >
-
-        <div class="section-container">
-
-          <div class="max-w-2xl">
-
-            <p
-              class="text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-            >
-              My toolkit
-            </p>
-
-            <h2
-              class="mt-4 text-4xl font-black tracking-tight sm:text-5xl"
-            >
-              Technologies I
-
-              <span class="gradient-text">
-                work with.
-              </span>
-            </h2>
-
-            <p
-              class="mt-5 leading-8 text-zinc-500"
-            >
-              A combination of mobile, web, backend and
-              development tools that I use to turn ideas
-              into products.
-            </p>
-
-          </div>
-
-          <div
-            class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-          >
-
-            <div
-              v-for="skill in skills"
-              :key="skill.name"
-              class="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition hover:-translate-y-1 hover:border-violet-500/50 hover:bg-white/[0.04]"
-            >
-
-              <div
-                class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-sm font-black"
-              >
-                {{ skill.icon }}
-              </div>
-
-              <h3 class="mt-5 font-bold">
-                {{ skill.name }}
-              </h3>
-
-              <div
-                class="mt-2 text-xs text-zinc-500"
-              >
-                {{ skill.level }}
-              </div>
-
-              <div
-                class="mt-5 h-1 overflow-hidden rounded-full bg-white/10"
-              >
-
-                <div
-                  class="h-full w-4/5 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 transition-all duration-500 group-hover:w-full"
-                />
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ===================================================
-           PROJECTS
-      ==================================================== -->
-
-      <section
-        id="projects"
-        class="border-b border-white/10 py-28"
-      >
-
-        <div class="section-container">
-
-          <div
-            class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
-          >
-
-            <div>
-
-              <p
-                class="text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-              >
-                Selected work
-              </p>
-
-              <h2
-                class="mt-4 text-4xl font-black tracking-tight sm:text-5xl"
-              >
-                Things I've
-
-                <span class="gradient-text">
-                  built.
-                </span>
-              </h2>
-
-              <p
-                class="mt-5 max-w-2xl leading-8 text-zinc-500"
-              >
-                A selection of mobile applications,
-                developer tools, open-source packages and
-                technology projects.
-              </p>
-
-            </div>
-
-            <a
-              href="https://github.com/Nget-Sophun"
-              target="_blank"
-              class="text-sm font-bold text-zinc-400 transition hover:text-violet-400"
-            >
-              View GitHub →
-            </a>
-
-          </div>
-
-          <!-- PROJECT GRID -->
-
-          <div
-            class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          >
-
-            <article
-              v-for="project in projects"
-              :key="project.slug"
-              class="project-card group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]"
-            >
-
-              <!-- Visual -->
-
-              <div
-                class="relative h-52 overflow-hidden bg-gradient-to-br"
-                :class="project.gradient"
-              >
-
-                <div
-                  class="absolute inset-0 bg-black/20"
-                />
-
-                <div
-                  class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl"
-                />
-
-                <div
-                  class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-black/10 blur-2xl"
-                />
-
-                <div
-                  class="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-3xl bg-white/15 text-4xl font-black text-white shadow-2xl backdrop-blur-md transition duration-500 group-hover:scale-110 group-hover:rotate-3"
-                >
-                  {{ project.icon }}
-                </div>
-
-                <span
-                  class="absolute right-4 top-4 rounded-full bg-black/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md"
-                >
-                  {{ project.type }}
-                </span>
-
-              </div>
-
-              <!-- Content -->
-
-              <div class="p-6">
-
-                <div
-                  class="flex items-start justify-between gap-3"
-                >
-
-                  <div>
-
-                    <h3 class="text-xl font-bold">
-                      {{ project.title }}
-                    </h3>
-
-                    <p
-                      class="mt-1 text-xs text-zinc-500"
-                    >
-                      {{ project.role }}
-                      <span
-                        v-if="project.company"
-                      >
-                        · {{ project.company }}
-                      </span>
-                    </p>
-
-                  </div>
-
-                  <span
-                    class="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500"
-                  >
-                    {{ project.year }}
-                  </span>
-
-                </div>
-
-                <p
-                  class="mt-4 min-h-20 text-sm leading-7 text-zinc-400"
-                >
-                  {{ project.description }}
-                </p>
-
-                <!-- Tags -->
-
-                <div
-                  class="mt-5 flex flex-wrap gap-2"
-                >
-
-                  <span
-                    v-for="tag in project.tags"
-                    :key="tag"
-                    class="rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-zinc-400"
-                  >
-                    {{ tag }}
-                  </span>
-
-                </div>
-
-                <!-- Case study -->
-
-                <button
-                  class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-violet-400 transition hover:gap-3 hover:text-violet-300"
-                  @click="openProject(project)"
-                >
-                  View case study
-
-                  <span>
-                    →
-                  </span>
-                </button>
-
-              </div>
-
-            </article>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ===================================================
-           EXPERIENCE
-      ==================================================== -->
-
-      <section
-        id="experience"
-        class="border-b border-white/10 py-28"
-      >
-
-        <div class="section-container">
-
-          <div class="max-w-2xl">
-
-            <p
-              class="text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-            >
-              Experience
-            </p>
-
-            <h2
-              class="mt-4 text-4xl font-black tracking-tight sm:text-5xl"
-            >
-              My professional
-
-              <span class="gradient-text">
-                journey.
-              </span>
-            </h2>
-
-          </div>
-
-          <div class="mt-14">
-
-            <div
-              v-for="(experience, index) in experiences"
-              :key="experience.role"
-              class="relative grid gap-8 pb-12 md:grid-cols-[180px_1fr]"
-            >
-
-              <div
-                v-if="index !== experiences.length - 1"
-                class="absolute bottom-0 left-[6px] top-8 w-px bg-white/10 md:left-[186px]"
-              />
-
-              <div
-                class="relative z-10 text-sm font-bold text-violet-400"
-              >
-                {{ experience.date }}
-              </div>
-
-              <div class="relative">
-
-                <span
-                  class="absolute -left-[33px] top-1 hidden h-3 w-3 rounded-full border-2 border-violet-500 bg-zinc-950 md:block"
-                />
-
-                <h3 class="text-xl font-bold">
-                  {{ experience.role }}
-                </h3>
-
-                <p
-                  class="mt-1 font-medium text-zinc-500"
-                >
-                  {{ experience.company }}
-                </p>
-
-                <p
-                  class="mt-5 max-w-3xl leading-8 text-zinc-500"
-                >
-                  {{ experience.description }}
-                </p>
-
-                <div
-                  class="mt-5 flex flex-wrap gap-2"
-                >
-
-                  <span
-                    v-for="tag in experience.tags"
-                    :key="tag"
-                    class="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-500"
-                  >
-                    {{ tag }}
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ===================================================
-           EDUCATION
-      ==================================================== -->
-
-      <section
-        class="border-b border-white/10 py-28"
-      >
-
-        <div class="section-container">
-
-          <div
-            class="grid gap-12 lg:grid-cols-2"
-          >
-
-            <div>
-
-              <p
-                class="text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-              >
-                Education
-              </p>
-
-              <h2
-                class="mt-4 text-4xl font-black tracking-tight sm:text-5xl"
-              >
-                Always
-
-                <span class="gradient-text">
-                  learning.
-                </span>
-              </h2>
-
-              <p
-                class="mt-5 max-w-xl leading-8 text-zinc-500"
-              >
-                Technology changes quickly. I believe
-                continuous learning and experimentation
-                are essential for becoming a better
-                developer.
-              </p>
-
-            </div>
-
-            <div class="space-y-4">
-
-              <div
-                v-for="item in education"
-                :key="item.title"
-                class="rounded-2xl border border-white/10 p-6"
-              >
-
-                <div
-                  class="text-xs font-bold uppercase tracking-wider text-violet-400"
-                >
-                  {{ item.year }}
-                </div>
-
-                <h3 class="mt-3 text-xl font-bold">
-                  {{ item.title }}
-                </h3>
-
-                <p
-                  class="mt-1 text-sm font-medium text-zinc-500"
-                >
-                  {{ item.school }}
-                </p>
-
-                <p
-                  class="mt-4 text-sm leading-7 text-zinc-500"
-                >
-                  {{ item.description }}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ===================================================
-           CONTACT
-      ==================================================== -->
-
-      <section
-        id="contact"
-        class="relative overflow-hidden py-32"
-      >
-
-        <div
-          class="absolute left-1/2 top-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/10 blur-3xl"
-        />
-
-        <div
-          class="section-container text-center"
-        >
-
-          <p
-            class="text-sm font-bold uppercase tracking-[0.25em] text-violet-400"
-          >
-            Contact
-          </p>
-
-          <h2
-            class="mx-auto mt-5 max-w-4xl text-5xl font-black tracking-tight sm:text-6xl"
-          >
-            Have an idea?
-
-            <br />
-
-            <span class="gradient-text">
-              Let's build it.
-            </span>
-          </h2>
-
-          <p
-            class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-500"
-          >
-            Whether you have a project, opportunity or
-            simply want to talk about technology, I'd love
-            to hear from you.
-          </p>
-
-          <div
-            class="mt-10 flex flex-wrap justify-center gap-3"
-          >
-
-            <a
-              href="mailto:ngetsophun@gmail.com"
-              class="rounded-xl bg-white px-7 py-4 text-sm font-bold text-zinc-950 shadow-xl transition hover:-translate-y-1 hover:bg-violet-400"
-            >
-              Send me an email →
-            </a>
-
-            <a
-              href="tel:+85510640074"
-              class="rounded-xl border border-white/10 px-7 py-4 text-sm font-bold transition hover:-translate-y-1 hover:border-violet-500 hover:text-violet-400"
-            >
-              Call me
-            </a>
-
-          </div>
-
-          <div
-            class="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-zinc-500"
-          >
-
-            <span>
-              Phnom Penh, Cambodia
-            </span>
-
-            <span>
-              •
-            </span>
-
-            <span>
-              ngetsophun@gmail.com
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </main>
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer
-      class="border-t border-white/10 py-8"
-    >
-
+    <!-- HERO -->
+    <section id="home" class="relative overflow-hidden pt-40 pb-28 md:pt-52 md:pb-36">
       <div
-        class="section-container flex flex-col items-center justify-between gap-4 text-sm text-zinc-500 sm:flex-row"
-      >
+        class="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style="background-image: radial-gradient(var(--color-gold) 1px, transparent 1px); background-size: 26px 26px;"
+      ></div>
 
-        <p>
-          © {{ new Date().getFullYear() }}
-          Nget Sophun.
-          All rights reserved.
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-signal">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-signal"></span>
+          </span>
+          Available for freelance — Phnom Penh, Cambodia
+        </div>
+
+        <h1 class="mt-8 max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
+          Building mobile apps
+          <span class="text-gold">&amp;</span>
+          intelligent robots.
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+          I'm Sophun — a mobile &amp; frontend developer from Cambodia. I build Flutter apps by day
+          and robots that see, hear and think by night.
         </p>
 
-        <div class="flex gap-5">
-
+        <div class="mt-10 flex flex-wrap gap-4">
           <a
-            href="https://github.com/Nget-Sophun"
-            target="_blank"
-            class="hover:text-violet-400"
+            href="#portfolio"
+            class="rounded-full bg-gold px-6 py-3 font-mono text-xs uppercase tracking-widest text-ink transition-transform hover:-translate-y-0.5"
           >
-            GitHub
-          </a>
+           View my work
+          </a> 
 
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            class="hover:text-violet-400"
+            <a
+            href="#contact"
+             class="rounded-full border border-line px-7 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-gold hover:text-gold"
           >
-            LinkedIn
-          </a>
+          Get in touch
+          </a> 
 
-          <a
-            href="mailto:ngetsophun@gmail.com"
-            class="hover:text-violet-400"
-          >
-            Email
-          </a>
-
+       
         </div>
 
+       
+
+        <dl class="mt-20 grid max-w-2xl grid-cols-3 gap-6 border-t border-line pt-8">
+          <div>
+            <dt class="font-mono text-xs uppercase tracking-widest text-muted">Role</dt>
+            <dd class="mt-1 font-display text-sm text-paper">Mobile Developer</dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs uppercase tracking-widest text-muted">Degree</dt>
+            <dd class="mt-1 font-display text-sm text-paper">B.Sc. Computer Science</dd>
+          </div>
+          <div>
+            <dt class="font-mono text-xs uppercase tracking-widest text-muted">Focus</dt>
+            <dd class="mt-1 font-display text-sm text-paper">Mobile · Backed · Robotics · AI</dd>
+          </div>
+        </dl>
       </div>
+    </section>
 
-    </footer>
-
-    <!-- =====================================================
-         PROJECT DETAIL MODAL
-    ====================================================== -->
-
-    <Teleport to="body">
-
-      <Transition name="modal">
-
-        <div
-          v-if="selectedProject"
-          class="fixed inset-0 z-[100] overflow-y-auto bg-black/80 p-4 backdrop-blur-md sm:p-8"
-          @click.self="closeProject"
-        >
-
-          <div
-            class="mx-auto my-6 max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-2xl sm:my-10"
-          >
-
-            <!-- Modal Header -->
-
-            <div
-              class="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-zinc-950/90 px-5 py-4 backdrop-blur-xl sm:px-8"
+    <!-- ABOUT -->
+    <section id="about" class="border-t border-line py-24 md:py-32">
+      <div class="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
+        <div class="relative">
+          <div class="aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-line bg-surface">
+            <img
+              src="https://ngetsophun.netlify.app/assets/img/profile.jpg"
+              alt="Nget Sophun"
+              class="h-full w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
             >
+          </div>
+          <div class="absolute -bottom-0 -right-6 hidden rounded-2xl border border-gold/30 bg-ink px-6 py-4 md:block">
+            <p class="font-display text-2xl font-semibold text-gold">3+</p>
+            <p class="font-mono text-[11px] uppercase tracking-widest text-muted">Years building</p>
+          </div>
+        </div>
 
-              <div class="flex items-center gap-3">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-gold">$ whoami</p>
+          <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+            A hardworking, self-driven engineer who learns by building.
+          </h2>
+          <p class="mt-6 leading-relaxed text-muted">
+            I'm currently pursuing Computer Science &amp; Software Engineering at the Royal University
+            of Phnom Penh. Coding and technology pulled me toward mobile development, where I now
+            build production Flutter apps. I thrive on challenges and enjoy adapting to new tools fast.
+          </p>
+          <p class="mt-4 leading-relaxed text-muted">
+            Outside of work, weekends belong to E-Robot — designing robots, experimenting with new
+            hardware, and folding AI (face and voice recognition, hand control) into real projects.
+          </p>
 
-                <div
-                  class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br text-lg font-black text-white"
-                  :class="selectedProject.gradient"
-                >
-                  {{ selectedProject.icon }}
-                </div>
-
-                <div>
-
-                  <div
-                    class="text-sm font-bold"
-                  >
-                    {{ selectedProject.title }}
-                  </div>
-
-                  <div
-                    class="text-xs text-zinc-500"
-                  >
-                    {{ selectedProject.type }}
-                  </div>
-
-                </div>
-
-              </div>
-
-              <button
-                class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-xl text-zinc-400 transition hover:border-white/20 hover:text-white"
-                @click="closeProject"
-              >
-                ×
-              </button>
-
+          <div class="mt-10 grid grid-cols-2 gap-x-8 gap-y-4 border-t border-line pt-8 font-mono text-sm">
+            <div class="flex justify-between border-b border-line/60 pb-3">
+              <span class="text-muted">Birthday</span><span>11 Dec 2001</span>
             </div>
-
-            <!-- Modal Content -->
-
-            <div class="p-5 sm:p-8 lg:p-12">
-
-              <!-- Hero -->
-
-              <div
-                class="grid gap-10 lg:grid-cols-[1.15fr_.85fr]"
-              >
-
-                <div>
-
-                  <div
-                    class="mb-5 flex flex-wrap gap-2"
-                  >
-
-                    <span
-                      class="rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-bold text-violet-400"
-                    >
-                      {{ selectedProject.status }}
-                    </span>
-
-                    <span
-                      class="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-500"
-                    >
-                      {{ selectedProject.year }}
-                    </span>
-
-                  </div>
-
-                  <h2
-                    class="text-4xl font-black tracking-tight sm:text-6xl"
-                  >
-                    {{ selectedProject.title }}
-                  </h2>
-
-                  <p
-                    class="mt-6 text-lg leading-8 text-zinc-400"
-                  >
-                    {{ selectedProject.longDescription }}
-                  </p>
-
-                  <!-- Project metadata -->
-
-                  <div
-                    class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3"
-                  >
-
-                    <div
-                      class="rounded-2xl border border-white/10 bg-white/[0.02] p-4"
-                    >
-
-                      <div
-                        class="text-[10px] font-bold uppercase tracking-wider text-zinc-500"
-                      >
-                        Role
-                      </div>
-
-                      <div
-                        class="mt-2 text-sm font-bold"
-                      >
-                        {{ selectedProject.role }}
-                      </div>
-
-                    </div>
-
-                    <div
-                      v-if="selectedProject.company"
-                      class="rounded-2xl border border-white/10 bg-white/[0.02] p-4"
-                    >
-
-                      <div
-                        class="text-[10px] font-bold uppercase tracking-wider text-zinc-500"
-                      >
-                        Company
-                      </div>
-
-                      <div
-                        class="mt-2 text-sm font-bold"
-                      >
-                        {{ selectedProject.company }}
-                      </div>
-
-                    </div>
-
-                    <div
-                      class="rounded-2xl border border-white/10 bg-white/[0.02] p-4"
-                    >
-
-                      <div
-                        class="text-[10px] font-bold uppercase tracking-wider text-zinc-500"
-                      >
-                        Year
-                      </div>
-
-                      <div
-                        class="mt-2 text-sm font-bold"
-                      >
-                        {{ selectedProject.year }}
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-                <!-- Project visual -->
-
-                <div
-                  class="relative min-h-[280px] overflow-hidden rounded-[2rem] bg-gradient-to-br"
-                  :class="selectedProject.gradient"
-                >
-
-                  <div
-                    class="absolute inset-0 bg-black/20"
-                  />
-
-                  <div
-                    class="absolute left-1/2 top-1/2 flex h-40 w-40 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2.5rem] bg-white/15 text-7xl font-black text-white shadow-2xl backdrop-blur-md"
-                  >
-                    {{ selectedProject.icon }}
-                  </div>
-
-                  <div
-                    class="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/20 bg-black/20 p-4 backdrop-blur-xl"
-                  >
-
-                    <div
-                      class="text-xs font-bold uppercase tracking-wider text-white/60"
-                    >
-                      Project
-                    </div>
-
-                    <div
-                      class="mt-1 font-bold text-white"
-                    >
-                      {{ selectedProject.title }}
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <!-- Divider -->
-
-              <div
-                class="my-12 h-px bg-white/10"
-              />
-
-              <!-- Features -->
-
-              <div
-                class="grid gap-12 lg:grid-cols-2"
-              >
-
-                <!-- Features -->
-
-                <section>
-
-                  <p
-                    class="text-xs font-bold uppercase tracking-[0.25em] text-violet-400"
-                  >
-                    Features
-                  </p>
-
-                  <h3
-                    class="mt-3 text-2xl font-black"
-                  >
-                    What the project includes
-                  </h3>
-
-                  <div
-                    class="mt-6 grid gap-3"
-                  >
-
-                    <div
-                      v-for="feature in selectedProject.features"
-                      :key="feature"
-                      class="flex gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4"
-                    >
-
-                      <span
-                        class="mt-0.5 text-violet-400"
-                      >
-                        ✓
-                      </span>
-
-                      <span
-                        class="text-sm leading-6 text-zinc-400"
-                      >
-                        {{ feature }}
-                      </span>
-
-                    </div>
-
-                  </div>
-
-                </section>
-
-                <!-- Technologies -->
-
-                <section>
-
-                  <p
-                    class="text-xs font-bold uppercase tracking-[0.25em] text-violet-400"
-                  >
-                    Technology
-                  </p>
-
-                  <h3
-                    class="mt-3 text-2xl font-black"
-                  >
-                    Technology stack
-                  </h3>
-
-                  <div
-                    class="mt-6 flex flex-wrap gap-3"
-                  >
-
-                    <span
-                      v-for="technology in selectedProject.technologies"
-                      :key="technology"
-                      class="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm font-medium text-zinc-300"
-                    >
-                      {{ technology }}
-                    </span>
-
-                  </div>
-
-                </section>
-
-              </div>
-
-              <!-- Responsibilities -->
-
-              <section class="mt-16">
-
-                <p
-                  class="text-xs font-bold uppercase tracking-[0.25em] text-violet-400"
-                >
-                  My contribution
-                </p>
-
-                <h3
-                  class="mt-3 text-2xl font-black"
-                >
-                  What I worked on
-                </h3>
-
-                <div
-                  class="mt-6 grid gap-3 sm:grid-cols-2"
-                >
-
-                  <div
-                    v-for="responsibility in selectedProject.responsibilities"
-                    :key="responsibility"
-                    class="rounded-xl border border-white/10 bg-white/[0.02] p-4"
-                  >
-
-                    <div class="flex gap-3">
-
-                      <span
-                        class="text-violet-400"
-                      >
-                        →
-                      </span>
-
-                      <span
-                        class="text-sm leading-6 text-zinc-400"
-                      >
-                        {{ responsibility }}
-                      </span>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </section>
-
-              <!-- Challenges -->
-
-              <section class="mt-16">
-
-                <p
-                  class="text-xs font-bold uppercase tracking-[0.25em] text-violet-400"
-                >
-                  Problem solving
-                </p>
-
-                <h3
-                  class="mt-3 text-2xl font-black"
-                >
-                  Challenges & solutions
-                </h3>
-
-                <div
-                  class="mt-6 grid gap-5"
-                >
-
-                  <div
-                    v-for="(challenge, index) in selectedProject.challenges"
-                    :key="index"
-                    class="grid gap-5 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:grid-cols-2"
-                  >
-
-                    <div>
-
-                      <div
-                        class="text-xs font-bold uppercase tracking-wider text-red-400"
-                      >
-                        Challenge
-                      </div>
-
-                      <p
-                        class="mt-3 text-sm leading-7 text-zinc-400"
-                      >
-                        {{ challenge.problem }}
-                      </p>
-
-                    </div>
-
-                    <div>
-
-                      <div
-                        class="text-xs font-bold uppercase tracking-wider text-emerald-400"
-                      >
-                        Solution
-                      </div>
-
-                      <p
-                        class="mt-3 text-sm leading-7 text-zinc-400"
-                      >
-                        {{ challenge.solution }}
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </section>
-
-              <!-- Screenshots -->
-
-              <section class="mt-16">
-
-                <p
-                  class="text-xs font-bold uppercase tracking-[0.25em] text-violet-400"
-                >
-                  Project gallery
-                </p>
-
-                <h3
-                  class="mt-3 text-2xl font-black"
-                >
-                  Screens & interface
-                </h3>
-
-                <div
-                  class="mt-6 grid gap-5 md:grid-cols-3"
-                >
-
-                  <div
-                    v-for="screenshot in selectedProject.screenshots"
-                    :key="screenshot.title"
-                    class="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]"
-                  >
-
-                    <!-- Image -->
-
-                    <div
-                      v-if="screenshot.image"
-                      class="aspect-[4/3] overflow-hidden bg-zinc-900"
-                    >
-
-                      <img
-                        :src="screenshot.image"
-                        :alt="screenshot.title"
-                        class="h-full w-full object-cover transition duration-500 hover:scale-105"
-                      />
-
-                    </div>
-
-                    <!-- Placeholder -->
-
-                    <div
-                      v-else
-                      class="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800"
-                    >
-
-                      <div
-                        class="text-center"
-                      >
-
-                        <div
-                          class="text-4xl font-black text-zinc-700"
-                        >
-                          {{ selectedProject.icon }}
-                        </div>
-
-                        <div
-                          class="mt-2 text-xs text-zinc-600"
-                        >
-                          Add screenshot
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div class="p-5">
-
-                      <h4 class="font-bold">
-                        {{ screenshot.title }}
-                      </h4>
-
-                      <p
-                        class="mt-2 text-xs leading-6 text-zinc-500"
-                      >
-                        {{ screenshot.description }}
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </section>
-
-              <!-- Result -->
-
-              <section
-                class="mt-16 rounded-3xl border border-violet-500/20 bg-violet-500/5 p-6 sm:p-8"
-              >
-
-                <p
-                  class="text-xs font-bold uppercase tracking-[0.25em] text-violet-400"
-                >
-                  Result
-                </p>
-
-                <p
-                  class="mt-4 text-lg leading-8 text-zinc-300"
-                >
-                  {{ selectedProject.result }}
-                </p>
-
-              </section>
-
-              <!-- Links -->
-
-              <div
-                v-if="
-                  selectedProject.links.github ||
-                  selectedProject.links.demo ||
-                  selectedProject.links.playStore
-                "
-                class="mt-8 flex flex-wrap gap-3"
-              >
-
-                <a
-                  v-if="selectedProject.links.github"
-                  :href="selectedProject.links.github"
-                  target="_blank"
-                  class="rounded-xl bg-white px-5 py-3 text-sm font-bold text-zinc-950 transition hover:bg-violet-400"
-                >
-                  GitHub →
-                </a>
-
-                <a
-                  v-if="selectedProject.links.demo"
-                  :href="selectedProject.links.demo"
-                  target="_blank"
-                  class="rounded-xl border border-white/10 px-5 py-3 text-sm font-bold text-zinc-300 transition hover:border-violet-500 hover:text-violet-400"
-                >
-                  Live Demo →
-                </a>
-
-                <a
-                  v-if="selectedProject.links.playStore"
-                  :href="selectedProject.links.playStore"
-                  target="_blank"
-                  class="rounded-xl border border-white/10 px-5 py-3 text-sm font-bold text-zinc-300 transition hover:border-violet-500 hover:text-violet-400"
-                >
-                  Google Play →
-                </a>
-
-              </div>
-
+            <div class="flex justify-between border-b border-line/60 pb-3">
+              <span class="text-muted">Degree</span><span>Bachelor</span>
             </div>
+            <div class="flex justify-between border-b border-line/60 pb-3">
+              <span class="text-muted">Phone</span><span>+855 10 640 074</span>
+            </div>
+            <div class="flex justify-between border-b border-line/60 pb-3">
+              <span class="text-muted">Email</span><span>ngetsophun@email.com</span>
+            </div>
+            <div class="flex justify-between border-b border-line/60 pb-3">
+              <span class="text-muted">City</span><span>Phnom Penh, KH</span>
+            </div>
+            <div class="flex justify-between border-b border-line/60 pb-3">
+              <span class="text-muted">Freelance</span><span class="text-signal">Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- SKILLS -->
+    <section id="skills" class="border-t border-line bg-surface py-24 md:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <p class="font-mono text-xs uppercase tracking-widest text-gold">$ skills --list</p>
+        <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          Tools I reach for
+        </h2>
+
+        <div class="mt-14 grid gap-16 md:grid-cols-2">
+          <div class="space-y-7">
+            <div v-for="skill in skills" :key="skill.name">
+              <div class="mb-2 flex items-baseline justify-between">
+                <span class="text-sm text-paper">{{ skill.name }}</span>
+                <span class="font-mono text-xs text-gold">{{ skill.level }}%</span>
+              </div>
+              <div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-gold-dim to-gold"
+                  :style="{ width: skill.level + '%' }"
+                ></div>
+              </div>
+            </div>
           </div>
 
+          <div class="flex flex-col justify-between">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-widest text-muted">Also working with</p>
+              <div class="mt-5 flex flex-wrap gap-3">
+                <span
+                  v-for="tech in stack"
+                  :key="tech"
+                  class="rounded-full border border-line px-4 py-2 font-mono text-xs text-muted transition-colors hover:border-gold hover:text-gold"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-10 rounded-2xl border border-line p-6">
+              <p class="font-mono text-xs uppercase tracking-widest text-signal">Robotics lab</p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">
+                Face &amp; voice recognition access control, hand-gesture smart-home control, and a
+                face-recognition wake-up alarm — built with E-Robot for real showcases and competitions.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-      </Transition>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="border-t border-line py-24 md:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <p class="font-mono text-xs uppercase tracking-widest text-gold">$ history</p>
+        <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          Experience &amp; education
+        </h2>
 
-    </Teleport>
+        <div class="mt-16 grid gap-16 lg:grid-cols-[1.4fr_1fr]">
+          <!-- Experience timeline -->
+          <div class="space-y-10 border-l border-line pl-8">
+            <div v-for="job in experience" :key="job.org" class="relative">
+              <span class="absolute -left-[35px] top-1.5 h-2.5 w-2.5 rounded-full bg-gold"></span>
+              <p class="font-mono text-xs uppercase tracking-widest text-muted">{{ job.year }}</p>
+              <h3 class="mt-2 font-display text-xl font-semibold">{{ job.role }}</h3>
+              <p class="text-sm text-signal">{{ job.org }}</p>
+              <ul class="mt-4 space-y-2">
+                <li
+                  v-for="point in job.points"
+                  :key="point"
+                  class="flex gap-3 text-sm leading-relaxed text-muted"
+                >
+                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold"></span>
+                  {{ point }}
+                </li>
+              </ul>
+            </div>
+          </div>
 
+          <!-- Education -->
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-muted">Education</p>
+            <div class="mt-6 space-y-6">
+              <div
+                v-for="edu in education"
+                :key="edu.title"
+                class="rounded-2xl border border-line p-6 transition-colors hover:border-gold/40"
+              >
+                <p class="font-mono text-xs text-gold">{{ edu.year }}</p>
+                <h4 class="mt-2 font-display text-base font-semibold">{{ edu.title }}</h4>
+                <p class="mt-1 text-sm text-muted">{{ edu.org }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="border-t border-line bg-surface py-24 md:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <p class="font-mono text-xs uppercase tracking-widest text-gold">$ ls ./projects</p>
+        <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          Selected work
+        </h2>
+
+        <div class="mt-14 grid gap-8 md:grid-cols-3">
+          <article
+            v-for="project in projects"
+            :key="project.title"
+            class="group overflow-hidden rounded-2xl border border-line bg-ink transition-colors hover:border-gold/40"
+          >
+            <div class="aspect-[16/10] overflow-hidden bg-surface-2">
+              <img
+                :src="project.img"
+                :alt="project.title"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              
+            </div>
+            <div class="p-6">
+              <p class="font-mono text-[11px] uppercase tracking-widest text-signal">{{ project.tag }}</p>
+              <h3 class="mt-2 font-display text-lg font-semibold">{{ project.title }}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{{ project.desc }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="border-t border-line py-24 md:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="grid gap-16 md:grid-cols-2">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-gold">$ contact --new</p>
+            <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+              Let's build something together.
+            </h2>
+            <p class="mt-6 max-w-md leading-relaxed text-muted">
+              Open to freelance mobile &amp; frontend work, and robotics collaborations.
+              Reach out any time — I usually reply within a day.
+            </p>
+
+            <div class="mt-10 space-y-4 font-mono text-sm">
+              <a href="mailto:ngetsophun@gmail.com" class="flex items-center gap-3 text-paper hover:text-gold">
+                <span class="text-muted">Email</span> ngetsophun@gmail.com
+              </a>
+              <a href="tel:+85510640074" class="flex items-center gap-3 text-paper hover:text-gold">
+                <span class="text-muted">Phone</span> +855 10 640 074
+              </a>
+              <div class="flex items-center gap-3 text-paper">
+                <span class="text-muted">Location</span> Phnom Penh, Cambodia
+              </div>
+            </div>
+
+            <div class="mt-10 flex gap-4">
+              <a
+                v-for="social in socials"
+                :key="social.label"
+                :href="social.href"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-full border border-line p-3 text-paper transition-colors hover:border-gold hover:text-gold"
+              >
+                {{ social.label }}
+              </a>
+            </div>  
+
+          
+          </div>
+
+          <form class="space-y-5 rounded-2xl border border-line bg-surface p-8" @submit.prevent>
+            <div>
+              <label class="font-mono text-xs uppercase tracking-widest text-muted">Name</label>
+              <input
+                type="text"
+                placeholder="Your name"
+                class="mt-2 w-full rounded-lg border border-line bg-ink px-4 py-3 text-sm text-paper placeholder:text-muted/60 focus:border-gold focus:outline-none"
+              >
+            </div>
+            <div>
+              <label class="font-mono text-xs uppercase tracking-widest text-muted">Email</label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                class="mt-2 w-full rounded-lg border border-line bg-ink px-4 py-3 text-sm text-paper placeholder:text-muted/60 focus:border-gold focus:outline-none"
+              >
+            </div>
+            <div>
+              <label class="font-mono text-xs uppercase tracking-widest text-muted">Message</label>
+              <textarea
+                rows="4"
+                placeholder="Tell me about your project"
+                class="mt-2 w-full rounded-lg border border-line bg-ink px-4 py-3 text-sm text-paper placeholder:text-muted/60 focus:border-gold focus:outline-none"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full rounded-full bg-gold py-3 font-mono text-xs uppercase tracking-widest text-ink transition-transform hover:-translate-y-0.5"
+            >
+              Send message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-line py-10">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 font-mono text-xs text-muted md:flex-row">
+        <p>© {{ new Date().getFullYear() }} Nget Sophun. Built with Nuxt &amp; Tailwind.</p>
+        <p>Phnom Penh, Cambodia</p>
+      </div>
+    </footer>
   </div>
 </template>
