@@ -1,7 +1,54 @@
 <script setup lang="ts">
 const navOpen = ref(false)
 const scrolled = ref(false)
+const selectedProject = ref<any>(null)
+const activeImage = ref(0)
 
+const activeGallery = computed(() =>
+  selectedProject.value?.images?.length
+    ? selectedProject.value.images
+    : selectedProject.value
+      ? [selectedProject.value.img]
+      : []
+)
+
+function openProject(project: any) {
+  if (project.url) {
+    window.open(project.url, '_blank', 'noopener,noreferrer')
+    return
+  }
+  selectedProject.value = project
+  activeImage.value = 0
+  document.body.style.overflow = 'hidden'
+}
+
+function closeProject() {
+  selectedProject.value = null
+  document.body.style.overflow = ''
+}
+
+function nextImage() {
+  activeImage.value = (activeImage.value + 1) % activeGallery.value.length
+}
+function prevImage() {
+  activeImage.value = (activeImage.value - 1 + activeGallery.value.length) % activeGallery.value.length
+}
+
+function handleKeydown(e: KeyboardEvent) {
+  if (!selectedProject.value) return
+  if (e.key === 'Escape') closeProject()
+  if (e.key === 'ArrowRight') nextImage()
+  if (e.key === 'ArrowLeft') prevImage()
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('keydown', handleKeydown)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('keydown', handleKeydown)
+})
 const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
@@ -116,12 +163,23 @@ const education = [
 ]
 
 const projects = [
+  // {
+  //   title: 'Smart GPS App',
+  //   tag: 'Flutter · Google Maps · REST API',
+  //   desc: 'Real-time GPS tracking app built with Flutter, integrating live maps and location APIs.',
+  //   img: 'https://ngetsophun.netlify.app/assets/img/gps_app1.png'
+  // },
   {
-    title: 'Smart GPS App',
-    tag: 'Flutter · Google Maps · REST API',
-    desc: 'Real-time GPS tracking app built with Flutter, integrating live maps and location APIs.',
-    img: 'https://ngetsophun.netlify.app/assets/img/gps_app1.png'
-  },
+  title: 'Smart GPS App',
+  tag: 'Flutter · Google Maps · REST API',
+  desc: 'Real-time GPS tracking app built with Flutter, integrating live maps and location APIs.',
+  img: 'https://ngetsophun.netlify.app/assets/img/gps_app1.png',
+  images: [
+    'https://ngetsophun.netlify.app/assets/img/gps_app1.png',
+    'https://ngetsophun.netlify.app/assets/img/gps_app2.png',
+    'https://ngetsophun.netlify.app/assets/img/gps_app3.png'
+  ]
+},
   {
     title: 'Merchant App',
     tag: 'Flutter · BLoC · Internal Storage',
@@ -145,37 +203,37 @@ const projects = [
     title: 'Damra App',
     tag: 'Flutter · Gamification · Firebase',
     desc: 'A gamified learning platform with levels, badges, and real-time leaderboards to make learning fun and competitive.',
-    img: 'https://ngetsophun.netlify.app/assets/img/damra_app.png'
+    img: '/img/damra.png'
   },
   {
   title: 'E-Robot',
   tag: 'IoT · AI · Python · Flutter',
   desc: 'Developed an AI-powered IoT system for controlling robots and smart home devices through mobile applications, featuring hand gesture, voice, and face recognition.',
-  video: '/assets/video/smart_home.mp4'
+  img: '/img/smart_home.jpg'
 },
   {
     title: 'Properties Evaluation (PEDS)',
     tag: 'Flutter · Google Maps · REST API',
     desc: 'A property evaluation app with GPS tracking, custom map markers, and tools for inspection, valuation, and reporting.',
-    img: 'https://ngetsophun.netlify.app/assets/img/peds_app.png'
+    img: '/img/peds_app.png'
   },
   {
     title: 'Center of Excellent (COE)',
     tag: 'Flutter · Maintenance · Feature Enhancement',
     desc: 'An internal app maintained and enhanced with new features and bug fixes to improve stability and usability.',
-    img: 'https://ngetsophun.netlify.app/assets/img/coe_app.png'
+    img: '/img/coe.png'
   },
   {
     title: 'Customer Feedback',
     tag: 'Web App · Maintenance',
     desc: 'A customer feedback web application, supported and enhanced to improve reliability and user experience.',
-    img: 'https://ngetsophun.netlify.app/assets/img/feedback_app.png'
+    img: '/img/customer_feedback.png'
   },
   {
     title: 'Canadia Bank Internal Message (CNB-IM)',
     tag: 'Flutter · Real-time Messaging',
     desc: 'An internal chat application using polling for near real-time messaging between bank staff.',
-    img: 'https://ngetsophun.netlify.app/assets/img/cnb_im_app.png'
+    img: '/img/cnb.jpg'
   },
   {
   title: 'Smart Data Table Plus',
@@ -505,6 +563,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
             v-for="project in projects"
             :key="project.title"
             class="group overflow-hidden rounded-2xl border border-line bg-ink transition-colors hover:border-gold/40"
+            @click="openProject(project)"
           >
             <div class="aspect-[16/10] overflow-hidden bg-surface-2">
               <img
@@ -519,10 +578,70 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
               <h3 class="mt-2 font-display text-lg font-semibold">{{ project.title }}</h3>
               <p class="mt-2 text-sm leading-relaxed text-muted">{{ project.desc }}</p>
             </div>
+            
           </article>
         </div>
       </div>
     </section>
+
+    <!-- PROJECT DETAILS MODAL -->
+    <!-- PROJECT DETAILS MODAL -->
+<Teleport to="body">
+  <div
+    v-if="selectedProject"
+    class="fixed inset-0 z-[60] flex items-center justify-center bg-ink/90 backdrop-blur-sm px-4 py-8"
+    @click.self="closeProject"
+  >
+    <div class="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-line bg-surface">
+      <button
+        class="absolute right-4 top-4 z-10 rounded-full border border-line bg-ink/80 p-2 text-paper hover:border-gold hover:text-gold"
+        aria-label="Close"
+        @click="closeProject"
+      >
+        ✕
+      </button>
+
+      <div class="relative flex max-h-[70vh] items-center justify-center bg-surface-2">
+        <img
+          :src="activeGallery[activeImage]"
+          :alt="selectedProject.title"
+          class="max-h-[70vh] w-full object-contain"
+        >
+
+        <template v-if="activeGallery.length > 1">
+          <button
+            class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-line bg-ink/70 p-2 text-paper hover:border-gold hover:text-gold"
+            aria-label="Previous image"
+            @click="prevImage"
+          >
+            ‹
+          </button>
+          <button
+            class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-line bg-ink/70 p-2 text-paper hover:border-gold hover:text-gold"
+            aria-label="Next image"
+            @click="nextImage"
+          >
+            ›
+          </button>
+          <div class="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+            <span
+              v-for="(img, i) in activeGallery"
+              :key="i"
+              class="h-1.5 w-1.5 rounded-full"
+              :class="i === activeImage ? 'bg-gold' : 'bg-paper/40'"
+            ></span>
+          </div>
+        </template>
+      </div>
+
+      <div class="max-h-[calc(90vh-70vh)] overflow-y-auto p-6 md:p-8">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-signal">{{ selectedProject.tag }}</p>
+        <h3 class="mt-2 font-display text-2xl font-semibold">{{ selectedProject.title }}</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">{{ selectedProject.desc }}</p>
+      </div>
+    </div>
+  </div>
+</Teleport>
 
     <!-- CONTACT -->
     <section id="contact" class="border-t border-line py-24 md:py-32">
