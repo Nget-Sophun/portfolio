@@ -66,13 +66,13 @@ const socials = [
 ]
 
 const skills = [
-  { name: 'Flutter & Dart', level: 85 },
+  { name: 'Flutter & Dart', level: 90 },
   { name: 'MVC/MVVM Architecture & Design Patterns', level: 75 },
   { name: 'State Management (BLoC, GetX, Riverpod)', level: 75 },
   { name: 'RESTful APIs & JSON', level: 80 },
   { name: 'Firebase Authentication & Cloud Services', level: 75 },
   { name: 'Java, Kotlin, Jetpack Compose', level: 65 },
-  { name: 'Backend Development (Node.js, Express.js, Laravel, Spring Boot)', level: 60 },
+  { name: 'Backend Development (Node.js, Express.js, Laravel, Spring Boot)', level: 65 },
   { name: 'MySQL & SQL Server', level: 65 },
   { name: 'Robotics & Internet of Things (IoT)', level: 80 },
   { name: 'Google Maps & WebSocket Integration', level: 70 }
